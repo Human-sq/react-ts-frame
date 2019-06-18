@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const json = require('./package.json');// 引进package.json
 
 const newEntry = {
-  bundle: ['babel-polyfill', './src/index.tsx'],
+  bundle: ['./src/index.tsx'],
 };
 
 const config = {
@@ -15,7 +15,7 @@ const config = {
       api: path.resolve(__dirname, './src/api'),
       images: path.resolve(__dirname, './src/assets/images'),
     },
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js'],
     mainFields: ['jsnext:main', 'browser', 'main'],
   },
   module: {
@@ -24,7 +24,6 @@ const config = {
         test: /\.tsx|ts?$/, 
         // use: ['happypack/loader?id=babel'],
         loader: ['babel-loader', 'awesome-typescript-loader'],
-        include: path.resolve(__dirname, 'src'),
         exclude: [
           path.resolve(__dirname, './node_modules'),
         ],
@@ -33,7 +32,6 @@ const config = {
         enforce: 'pre', 
         test: /\.js$/, 
         loader: ['babel-loader', 'source-map-loader'],
-        include: path.resolve(__dirname, 'src'),
         exclude: [
           path.resolve(__dirname, './node_modules'),
         ],

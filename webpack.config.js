@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-// const UglifyJsPlugin = require('uglifyjs-3-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');// 基础配置
 
 const config = merge(baseWebpackConfig, {
@@ -42,16 +41,16 @@ const config = merge(baseWebpackConfig, {
         NODE_ENV: `"${process.env.NODE_ENV}"`,
       },
     }),
-    /* common 业务公共代码，vendor引入第三方 */
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      minChunks: 2,
-    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: ({ resource }) => (
         resource && resource.indexOf('node_modules') >= 0 && resource.match(/\.js$/)
       ),
+    }),
+    /* common 业务公共代码，vendor引入第三方 */
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      minChunks: 2,
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'runtime',
@@ -93,15 +92,6 @@ if (process.env.NODE_ENV === 'production') {
   config.devtool = 'cheap-module-source-map';
   config.output.filename = '[name]-[chunkhash:8].js';
   config.plugins = (config.plugins || []).concat([
-    // new UglifyJsPlugin({
-    //   sourceMap: true,
-    //   uglifyOptions: {
-    //     compress: {
-    //       warnings: false,
-    //       drop_console: true,
-    //     },
-    //   },
-    // }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {

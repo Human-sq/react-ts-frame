@@ -1,20 +1,21 @@
 {
 	"compilerOptions": {
-        "experimentalDecorators": true,
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "target": "es2015",
-        "jsx": "react",
-        // "paths": {
-        //   "components/*": ["./src/components/*"],
-        //   "store/*": ["./src/store/*"],
-        //   "api/*": ["./src/api/*"],
-        //   "images/*": ["./src/assets/images/*"],
-        // }
+    "experimentalDecorators": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es2015",
+    "jsx": "react",
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "store/*": ["./src/store/*"],
+      "api/*": ["./src/api/*"],
+      "images/*": ["./src/assets/images/*"],
+    }
 	},
 	"include": [
-			"./src/*"
+    "./src/*"
 	]
 }
